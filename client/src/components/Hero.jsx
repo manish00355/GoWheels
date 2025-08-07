@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <div className='h-screen flex flex-col items-center justify-center gap-14 bg-light text-center'>
 
-        <h1 className='text-4xl md:text-5xl font-semibold'>GoWheels - Your Ride, Your Way</h1>
+        <h1 className='text-4xl md:text-5xl font-semibold '>GoWheels - Your Ride, Your Way</h1>
         <h1 className='text-2xl md:text-2xl font-semibold  text-gray-500 -mt-10'>Affordable Car Rentals Near You</h1>
    
 

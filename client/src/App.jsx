@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import CarDetails from './pages/CarDetails'
 import Cars from './pages/Cars'
 import MyBookings from './pages/MyBookings'
+import CarCard from './components/CarCard'
 
 
 const App = () => {
@@ -25,6 +26,8 @@ const App = () => {
        <Route path="/my-booking " element={<MyBookings/>}/>
     </Routes>
 
+
+   
 
     </>
   )
