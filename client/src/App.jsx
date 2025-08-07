@@ -7,6 +7,7 @@ import CarDetails from './pages/CarDetails'
 import Cars from './pages/Cars'
 import MyBookings from './pages/MyBookings'
 import CarCard from './components/CarCard'
+import Footer from './components/Footer'
 
 
 const App = () => {
@@ -25,8 +26,11 @@ const App = () => {
       <Route path="/cars" element={<Cars/>}/>
        <Route path="/my-booking " element={<MyBookings/>}/>
     </Routes>
+    {/*hide footer for admin dashboard  */}
 
 
+  {/* footer is added to every page  */}
+  {!isOwnerPath && <Footer/>}
    
 
     </>
