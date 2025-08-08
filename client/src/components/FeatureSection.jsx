@@ -16,7 +16,7 @@ const FeatureSection = () => {
             <Title title="Featured Vehicles" subtitle="Explore our selection of premium vehicle available for your next adventure."/>
         </div>
 
-         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-18'>
+         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16'>
             {
                 dummyCarData.slice(0,6).map((car)=>(
                     <div key={car._id}>
@@ -31,7 +31,7 @@ const FeatureSection = () => {
          </div> 
 
          <button onClick={()=>{
-            navigate('/cars'); scrollTo(0,0)
+            navigate('/cars');  setTimeout(() => window.scrollTo(0, 0), 100); 
          }}
           className='flex items-center justify-center gap-2 px-6 py-2 border border-borderColor hover:bg-gray-50 rounded-md mt-18 cursor-pointer'>
             Explore all cars <img src={assets.arrow_icon} alt="arrow"/>
