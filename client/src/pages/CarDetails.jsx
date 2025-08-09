@@ -36,7 +36,7 @@ const CarDetails = () => {
           <div className='space-y-6'>
             <div>
               <h1 className='text-3xl font-bold'>{car.brand} {car.model}</h1>
-              <p className='text-gray-500 text-lg'>{car.category} . {car.year}</p>
+              <p className='text-gray-500 text-lg'>{car.category} • {car.year}</p>
             </div>
             <hr className='border-borderColor my-6' /> 
             <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
@@ -74,6 +74,7 @@ const CarDetails = () => {
                 ].map((item)=>(
                   <li key={item} className='flex items-center text-gray-500'>
                   <img src={assets.check_icon} alt="" className='h-4 mr-2'/>
+                  {item}
         
                   </li>
                 ))
