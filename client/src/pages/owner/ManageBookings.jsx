@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ManageBooking = () => {
+const ManageBookings = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const ManageBooking = () => {
   )
 }
 
-export default ManageBooking
+export default ManageBookings

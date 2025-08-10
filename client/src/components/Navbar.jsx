@@ -11,7 +11,7 @@ const Navbar = ({setShowLogin}) => {
     const location = useLocation()
     // menu will be closed in small screens
     const [open, setOpen] = useState(false)
- const navigate = useNavigate
+ const navigate = useNavigate()
 
   return (
     <div
