@@ -5,8 +5,8 @@ import {motion} from 'motion/react'
 
 const Testimonial = () => {
      const testimonials = [
-        {  name: "Emma Rodriguez", 
-            location: "Barcelona, Spain",
+        {  name: "Arun Singh", 
+            location: "Samba, Jammu",
              image:assets.testimonial_image_1,
              testimonial: "I booked a car last-minute and GoWheels delivered beyond expectations. The car was spotless and the pickup process was seamless. Highly recommended!" },
 
