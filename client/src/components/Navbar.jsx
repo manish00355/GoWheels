@@ -1,24 +1,51 @@
 import React from 'react'
 import {assets, menuLinks} from '../assets/assets'
 import {Link, useLocation, useNavigate} from 'react-router-dom'
-import logo from '../assets/GoWheels.logo.png';
+
 import { useState } from 'react'
+import { useAppContext } from '../context/AppContext';
+import toast from 'react-hot-toast';
+import {motion} from 'motion/react'
+import Logo from '../assets/logo4-removebg-preview.png'
 
 
 
-const Navbar = ({setShowLogin}) => {
+
+const Navbar = () => { 
+
+  const {setShowLogin , user , logout , isOwner , axios ,setIsOwner} = useAppContext();
 
     const location = useLocation()
     // menu will be closed in small screens
     const [open, setOpen] = useState(false)
- const navigate = useNavigate()
+ const navigate = useNavigate() 
+
+
+ // change role to owner when user click on list cars button 
+     const changeRole =async()=>{
+      try {
+         const {data} = await axios.post( '/api/owner/change-role')
+         if(data.success){
+          setIsOwner(true)
+          toast.success(data.message)
+         }
+         else{
+            toast.error(data.message)
+         }
+      } catch (error) {
+         toast.error(error.message)
+      }
+     }
 
   return (
-    <div
+    <motion.div 
+    initial={{y:-20 ,opacity:0}}
+    animate={{y:0,opacity:1}}
+    transition={{duration:0.5}}
     className={`flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 text-gray-600 border-b border-borderColor relative transition-all ${location.pathname === "/" &&'bg-light' } `}>
         {/* click on the logo to go to home page */}
         <Link to='/'>
-       <img src={logo} alt="logo" className="h-20 w-auto" />
+       <motion.img  whileHover={{scale:1.25}} src={Logo} alt="logo" className="h-20 w-auto" />
 
         </Link>
 
@@ -49,9 +76,14 @@ const Navbar = ({setShowLogin}) => {
             </div>
       {/* dashboard & login button */}
         <div className='flex max-sm:flex-col items-start sm:items-center gap-6'>
-            <button onClick={()=> navigate('/owner')} className='cursor-pointer'>Dashboard</button>
+
+
+            <button onClick={()=> isOwner ?  navigate('/owner') : changeRole()} className='cursor-pointer'>{ isOwner ? 'Dashboard' : 'List Cars'}</button>
+
+
+
             {/* open the login form when created  */}
-   <button  onClick={()=>setShowLogin(true)} className="
+   <button  onClick={()=>{ user ? logout() : setShowLogin(true)}} className="
   cursor-pointer 
   px-8 py-2 
   bg-blue-600 
@@ -61,7 +93,7 @@ const Navbar = ({setShowLogin}) => {
   shadow-md 
   transition-colors duration-300
 ">
-  Login
+ {user ? 'Logout' : "Login"}
 </button>
 
 
@@ -73,7 +105,7 @@ const Navbar = ({setShowLogin}) => {
             <img src={open ? assets.close_icon : assets.menu_icon } alt="menu" />
         </button>
     
-    </div>
+    </motion.div>
   )
 }
 

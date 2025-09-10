@@ -24,7 +24,7 @@ export const AppProvider = ({children})=>{
      const [cars , setCars] = useState([])
 
      // Function to fetch  if user is logged in 
-     const fecthUser = async()=>{
+     const fetchUser = async()=>{
         try {
             const {data} =await axios.get('/api/user/data') 
             if(data.success){
@@ -77,7 +77,7 @@ export const AppProvider = ({children})=>{
      useEffect(()=>{
         if(token){
             axios.defaults.headers.common['Authorization'] = `${token}`
-            fecthUser()
+            fetchUser()
         }
 
      },[token])
@@ -85,7 +85,7 @@ export const AppProvider = ({children})=>{
 
 
     const value ={
-        navigate,currency,axios , user ,setUser , token ,setToken , isOwner , setIsOwner , fecthUser, showLogin , setShowLogin ,logout , fetchCars , cars , setCars , pickupDate , setPickupDate , returnDate , setReturnDate
+        navigate,currency,axios , user ,setUser , token ,setToken , isOwner , setIsOwner , fetchUser, showLogin , setShowLogin ,logout , fetchCars , cars , setCars , pickupDate , setPickupDate , returnDate , setReturnDate
     }
 
     return (

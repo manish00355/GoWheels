@@ -15,18 +15,20 @@ import ManageCars from './pages/owner/ManageCars'
 import ManageBookings from './pages/owner/ManageBookings'
 import LoginForm from './components/LoginForm'
 import {Toaster} from 'react-hot-toast'
+import { useAppContext } from './context/AppContext'
 
 
 
 const App = () => {
-  const [showLogin, setShowLogin] = useState(false)
+ 
+  const {showLogin} = useAppContext()
   const isOwnerPath = useLocation().pathname.startsWith('/owner');
   return (
     <>
  <Toaster/>
- { showLogin &&   <LoginForm setShowLogin={setShowLogin}/>}
+ { showLogin &&   <LoginForm />}
     {/* navbar will not appear on owner dashboard else it will appear on every page */}
-    { !isOwnerPath && <Navbar setShowLogin={setShowLogin}/>}
+    { !isOwnerPath && <Navbar />}
     
 
     <Routes>
