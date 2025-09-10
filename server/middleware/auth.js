@@ -8,18 +8,20 @@ export const protect = async(req , res ,next)=>{
     if(!token){
         return res.json({success : false , message: "user is not authorized "})
     }
+  // Remove "Bearer " if present
+  
+
     // token is available
     try {
-        const userId = jwt.decode(token , process.env.JWT_SECTRET)
+        const userId = jwt.decode(token , process.env.JWT_SECRET)
 
         if(!userId){
-               return res.json({success : false , message: "user is not authorized "})
+               return res.json({success : false , message: "user manish is not authorized "})
         }
         // find user in DB using userId
       req.user =   await User.findById(userId).select
       ("-password")
-
-      next();
+       next();
     } catch (error) {
          return res.json({success : false , message: "user is not authorized "})
         

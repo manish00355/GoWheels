@@ -86,10 +86,13 @@ export const toggleCarAvailability = async(req ,res)=>{
 
         const {_id} = req.user;
         const {carId} = req.body;
-        const car = await Car.findById({carId})
+        const car = await Car.findById(carId)
+          if (!car) {
+      return res.json({ success: false, message: "Car not found" });
+    }
 
         // checking if car belong to the user
-        if(car.owner.toString() !== _id.tostring()){
+        if(car.owner.toString() !== _id.toString()){
             return res.json({success : false , message : "owner is not authorized"});
         }
 
@@ -114,10 +117,10 @@ export const deleteCar = async(req ,res)=>{
 
         const {_id} = req.user;
         const {carId} = req.body;
-        const car = await Car.findById({carId})
+        const car = await Car.findById(carId)
 
         // checking if car belong to the user
-        if(car.owner.toString() !== _id.tostring()){
+        if(car.owner.toString() !== _id.toString()){
             return res.json({success : false , message : "owner is not authorized"});
         }
 
@@ -144,7 +147,7 @@ export const getDashboardData = async(req, res)=>{
            return res.json({success:false , message : "owner is not authorized"})
         }
         const cars = await Car.find({owner: _id})
-        const bookings = await Booking.find({owner:_id}).populate('car ').sort({createdAt:-1});
+        const bookings = await Booking.find({owner:_id}).populate('car').sort({createdAt:-1});
 
         const pendingBookings =  await Booking.find({owner:_id , status:"pending"})
 

@@ -34,7 +34,7 @@ const carSchema = new mongoose.Schema({
         required:true ,
 
     },
-    saeting_capacity:{
+    seating_capacity:{
         type:String,
         required:true ,
 
@@ -59,7 +59,7 @@ const carSchema = new mongoose.Schema({
         required:true ,
 
     },
-    discription:{
+    description:{
         type:String,
         required:true ,
 
@@ -73,6 +73,6 @@ const carSchema = new mongoose.Schema({
 
  },{timestamps : true})
 
- const Car = mongoose.model('car' , carSchema)
+ const Car = mongoose.model('Car' , carSchema)
 
  export default Car;

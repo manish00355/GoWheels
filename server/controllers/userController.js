@@ -1,25 +1,31 @@
 import User from "../models/User.model.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import Car from "../models/car.model.js";
 
     // generate JWT Tokens
-    const generateToken = (userId)=>{
-        const payload = userId;
-        return jwt.sign(payload , process.env.JWT_SECRET)
-    }
+  const generateToken = (userId)=>{
+    const payload = userId;
+    return jwt.sign(payload, process.env.JWT_SECRET)
+}
+
 
 // register user controller
 export const registerUser = async(req , res) =>{
     try {
         const {name , email , password} = req.body;
 
-        if(!name ||!email || !password || password.length < 8){
-            return res.json({sucess : false , message :'Ivalid Credentials'})
-        }
+       if (!name || !email || !password) {
+  return res.json({ success: false, message: "All fields are required" });
+}
+if (password.length < 8) {
+  return res.json({ success: false, message: "Password must be at least 8 characters long" });
+}
+
         // check user exists or not already
-        const userEsixts = await User.findOne({email})
-        if(userEsixts){
-            return res.json({sucess : false , message :'User already exists'})
+        const userExists = await User.findOne({email})
+        if(userExists){
+            return res.json({success : false , message :'User already exists'})
         }
 
         // create user 
@@ -77,3 +83,12 @@ export const getUserDetials = async(req , res)=>{
     }
 }
 
+// get all cars from the frontend
+export const getCars = async(req , res)=>{
+    try {
+        const cars = await Car.find({isAvailable:true})
+        res.json({success:true , cars})
+    } catch (error) {
+        res.json({success:false , message :error.message})
+    }
+}
